@@ -109,10 +109,10 @@ def fn_setTier():
       ldevSetName = subprocess.Popen(raidcom_cmd + ' modify ldev -ldev_id ' + hex(ldev.number) + ' -ldev_name ' + str(ldev.name) + ' -IM' + str(horcm_instance), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
       output, err = ldevSetTier.communicate()
       output, err = ldevSetName.communicate()
-      if tier == 6:  # GE Peformance tier
-        print 'Tier policy for ' + hex(ldev.number) + ' set to GE Performance' 
-      if tier == 7:  # GE Standard tier
-        print 'Tier policy for ' + hex(ldev.number) + ' set to GE Standard'
+      if tier == 6:  # Peformance tier
+        print 'Tier policy for ' + hex(ldev.number) + ' set to Performance' 
+      if tier == 7:  # Standard tier
+        print 'Tier policy for ' + hex(ldev.number) + ' set to Standard'
    return;
 
 ## function create host group 1 host per CL port auto generate _p1/_p2 _p3/_p4 into name  * clusters will be created with one name * 
@@ -209,7 +209,7 @@ def fn_inputLdevSize():
    if ldev_size.endswith('G'):  #test for valid input as well as min/max ldev size
        ldev_size_temp = int(ldev_size.rstrip('G'))
        if ldev_size_temp < ldev_min or ldev_size_temp > ldev_max:  
-           print 'size outside GE standards'
+           print 'size outside standards'
            exit()
        if ldev_naming == 'manual':
           ldev_name = raw_input("Enter the name for this LDEV (typically host name for a LDOM) ")  # this way the LDOM name is registered on the LDEV.
@@ -315,7 +315,7 @@ def fn_findPools():
       pid = groupfields[0]
       av_cap = groupfields[3]  # available capacity in pool physical/real
       tp_cap = groupfields[4]  # physical size of pool
-      tl_cap = groupfields[10] # amount of storage subscribed to the pool.  GE std is to set subscription of pool to 120% of physical capacity
+      tl_cap = groupfields[10] # amount of storage subscribed to the pool.  std is to set subscription of pool to 120% of physical capacity
       name = ''  #blank for now added further down the script
       if re.search('\d+', pid):  # pulls PID #
          av_cap = int(av_cap) / 1024 / 1024  # convert from MB to TB  
